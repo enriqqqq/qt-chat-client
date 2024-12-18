@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -81,7 +81,7 @@
               <widget class="QLineEdit" name="lnPrivate"/>
              </item>
              <item>
-              <widget class="QPushButton" name="btnSend_2">
+              <widget class="QPushButton" name="btnSendPrivate">
                <property name="text">
                 <string>Send</string>
                </property>

@@ -54,7 +54,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
     QLineEdit *lnPrivate;
-    QPushButton *btnSend_2;
+    QPushButton *btnSendPrivate;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_6;
     QListWidget *lstPrivate;
@@ -141,10 +141,10 @@ public:
 
         horizontalLayout_2->addWidget(lnPrivate);
 
-        btnSend_2 = new QPushButton(groupBox_2);
-        btnSend_2->setObjectName("btnSend_2");
+        btnSendPrivate = new QPushButton(groupBox_2);
+        btnSendPrivate->setObjectName("btnSendPrivate");
 
-        horizontalLayout_2->addWidget(btnSend_2);
+        horizontalLayout_2->addWidget(btnSendPrivate);
 
 
         gridLayout_5->addLayout(horizontalLayout_2, 1, 0, 1, 1);
@@ -188,7 +188,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -205,7 +205,7 @@ public:
         btnSend->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Users", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Message:", nullptr));
-        btnSend_2->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
+        btnSendPrivate->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
         groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "Messages", nullptr));
         menuOption->setTitle(QCoreApplication::translate("MainWindow", "Option", nullptr));
     } // retranslateUi
