@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>683</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Client</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Messages</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="1">
+            <widget class="QListWidget" name="lstMessages"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Message:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lnMessage"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnSend">
+            <property name="text">
+             <string>Send</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Users</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QListWidget" name="userLst"/>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Message:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lnPrivate"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSend_2">
+               <property name="text">
+                <string>Send</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Messages</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QListWidget" name="lstPrivate"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>683</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOption">
+    <property name="title">
+     <string>Option</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionPrivateMessage"/>
+    <addaction name="actionPublic_Chat"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuOption"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionPrivateMessage">
+   <property name="text">
+    <string>Private Message</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionPublic_Chat">
+   <property name="text">
+    <string>Public Chat</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
