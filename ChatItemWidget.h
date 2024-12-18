@@ -13,6 +13,13 @@ class ChatItemWidget : public QWidget
 
 public:
     explicit ChatItemWidget(QWidget *parent = nullptr);
+
+    void setMessage(const QString &message);
+
+    void setSender(const QString &sender);
+
+    void setTime(const QString &time);
+
     ~ChatItemWidget();
 
 private:

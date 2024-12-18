@@ -8,11 +8,32 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->actionPublic_Chat->setVisible(false);
     ui->stackedWidget->setCurrentIndex(0);
+
+    // create new client manager instance
+    m_ClientManager = new ClientManager(this);
+
+    // connect client manager signls to main window slots
+    connect(m_ClientManager, &ClientManager::connected, this, &MainWindow::handleConnected);
+    connect(m_ClientManager, &ClientManager::messageReceived, this, &MainWindow::handleMessageReceived);
+
+    // connect to websocket server
+    m_ClientManager->connectToServer(QUrl("ws://localhost:8080"));
+    // ClientManager->connectToServer(QUrl("wss://simple-websocket-server-public-chat.glitch.me"));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::handleConnected()
+{
+    qDebug() << "Connected to server";
+}
+
+void MainWindow::handleMessageReceived(const QString &message)
+{
+    qDebug() << "Message received: " << message;
 }
 
 void MainWindow::on_btnSend_clicked()

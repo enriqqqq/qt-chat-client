@@ -20,6 +20,11 @@ public:
     ~MainWindow();
 
 private slots:
+
+    void handleConnected();
+
+    void handleMessageReceived(const QString &message);
+
     void on_btnSend_clicked();
 
     void on_btnSendPrivate_clicked();
@@ -32,7 +37,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    ClientManager *ClientManager; // Pointer to ClientManager
+    ClientManager *m_ClientManager; // Pointer to ClientManager
     QString m_clientId; // Client ID
     void postMessage(QString message, QString title, QListWidget *list);
 

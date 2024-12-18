@@ -16,7 +16,17 @@ void ClientManager::onMessageReceived(const QString &message) {
 
 void ClientManager::connectToServer(const QUrl &url) {
     // Connect to the WebSocket server
+    qDebug() << "Connecting to server";
     m_webSocket.open(url);
+
+    // // create request
+    // QNetworkRequest request(url);
+
+    // // add user agent
+    // request.setRawHeader("User-Agent", "MyChatApp 1.0");
+
+    // // open connection
+    // m_webSocket.open(request);
 }
 
 void ClientManager::sendMessage(const QString &message) {
