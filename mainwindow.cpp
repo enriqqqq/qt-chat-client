@@ -1,5 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ChatItemWidget.h"
+
+#include <QDateTime>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +32,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::postMessage(QString message, QString title, QListWidget *list)
+{
+    // get time
+    QString time = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm");
+
+    // new chat item
+    ChatItemWidget *chatItem = new ChatItemWidget();
+
+    // set labels
+    chatItem->setMessage(message);
+    chatItem->setSender(title);
+    chatItem->setTime(time);
+
+    // create new item
+    QListWidgetItem *listItem = new QListWidgetItem(list);
+
+    // set size
+    listItem->setSizeHint(chatItem->sizeHint());
+
+    // add widget to item
+    list->setItemWidget(listItem, chatItem);
+
+    // add item to list
+    list->addItem(listItem);
+}
+
 void MainWindow::handleConnected()
 {
     qDebug() << "Connected to server";
@@ -34,11 +66,39 @@ void MainWindow::handleConnected()
 void MainWindow::handleMessageReceived(const QString &message)
 {
     qDebug() << "Message received: " << message;
+    // parse JSON
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(message.toUtf8());
+
+    // change to object
+    QJsonObject jsonObj = jsonDoc.object();
+
+    // get type
+    QString type = jsonObj["type"].toString();
+
+    if(type == "welcome") {
+        m_clientId = jsonObj["clientId"].toString();
+    }
+
+    if(type == "broadcast") {
+        QString senderId = jsonObj["senderId"].toString();
+
+        postMessage(
+            jsonObj["message"].toString(),
+            senderId == m_clientId ? senderId + " (Me)" : senderId,
+            ui->lstMessages
+        );
+    }
 }
 
 void MainWindow::on_btnSend_clicked()
 {
+    // check if message is empty
+    if(ui->lnMessage->text().isEmpty()) {
+        return;
+    }
 
+    // send raw string
+    m_ClientManager->sendMessage(ui->lnMessage->text());
 }
 
 
