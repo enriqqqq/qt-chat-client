@@ -88,6 +88,33 @@ void MainWindow::handleMessageReceived(const QString &message)
             ui->lstMessages
         );
     }
+
+    if(type == "connectedClients") {
+        // get clientIds array
+        QJsonArray clientIds = jsonObj["clientIds"].toArray();
+
+        // clear list
+        ui->userLst->clear();
+
+        // iterate over clientIds
+        for(auto clientId : clientIds) {
+            // client text
+            QString clientText = clientId == m_clientId ? clientId.toString() + " (Me)" : clientId.toString();
+
+            // add client to list
+            ui->userLst->addItem(clientText);
+        }
+    }
+
+    if(type == "private") {
+        QString senderId = jsonObj["senderId"].toString();
+
+        postMessage(
+            jsonObj["message"].toString(),
+            "From " + senderId,
+            ui->lstPrivate
+        );
+    }
 }
 
 void MainWindow::on_btnSend_clicked()
@@ -104,7 +131,43 @@ void MainWindow::on_btnSend_clicked()
 
 void MainWindow::on_btnSendPrivate_clicked()
 {
+    // check if message is empty
+    if(ui->lnPrivate->text().isEmpty()) {
+        return;
+    }
 
+    // get selected id
+    QString selectedId = ui->userLst->currentItem()->text();
+
+    // check if selected id is not empty
+    if(selectedId.isEmpty()) {
+        return;
+    }
+
+    // check if it doesnt contain (me)
+    if(selectedId.contains("(Me)")) {
+        return;
+    }
+
+    // create JSON object
+    QJsonObject jsonObj;
+
+    jsonObj["type"] = "private";
+    jsonObj["message"] = ui->lnPrivate->text();
+    jsonObj["recipientId"] = selectedId;
+
+    // create JSON document
+    QJsonDocument jsonDoc(jsonObj);
+
+    // send JSON string
+    m_ClientManager->sendMessage(jsonDoc.toJson());
+
+    // post message with "To"
+    postMessage(
+        ui->lnPrivate->text(),
+        "To " + selectedId,
+        ui->lstPrivate
+    );
 }
 
 
